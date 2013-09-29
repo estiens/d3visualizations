@@ -1,7 +1,15 @@
-div.bar {
+.bar {
   display:inline-block;
   width: 20px;
   height: 75px;
   background-color: teal;
   margin-right:5px;
 }
+
+.canvas {
+  width:600px;
+  height:100px;
+}
+
+.circle {fill:blue;
+stroke:black;}
