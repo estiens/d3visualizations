@@ -1,0 +1,1 @@
+Working through Scott Murray's D3 tutorials to get a better handle on javacript and also the D3 library
