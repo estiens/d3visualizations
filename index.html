@@ -5,6 +5,7 @@
         <title>D3 Test</title>
         <LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
         <script type="text/javascript" src="d3/d3.v3.min.js"></script>
+        <script type="text/javascript" src="js/visualizations1.js"></script>
 
     </head>
     <body>
@@ -24,35 +25,35 @@
     
 
         <script type="text/javascript">
-            var dataset = [];
-            for (i=0; i<30; i++){
-                var newNumber = Math.round(Math.random()*30);
-                dataset.push(newNumber);
-            };
+            var svgW=750
+            var svgH=100
+            var svg = d3.select("body").append("svg").attr("width", svgW).attr("height", svgH)
 
-            var dataset2 = [5,10,15,20,25];
-            
-            d3.select("body").selectAll("div.chart").data(dataset).enter().append("div")
-            .attr("class", "bar").style("height", function(d){
-               var barHeight = d * 5;
-               return barHeight + "px";
+            svg.selectAll("rect").data(dataset).enter().append("rect")
+            .attr("x", function(d,i){
+                return i * (svgW / dataset.length);
+            })
+            .attr("y", function(d){
+                return svgH - d
+            })
+            .attr("width", (svgW / dataset.length-2))
+            .attr("height", function(d){
+                return d ;
+            })
+            .attr("fill", function(d){
+                return "rgba(0,0,100,1)"
             })
 
-            var svg = d3.select("body").append("svg");
-            svg.attr("width", 500).attr("height", 100);
-            var circles = svg.selectAll("circle").data(dataset2).enter().append("circle");
-            circles.attr("cx", function(d, i){
-                return (i * 50) + 25;
-            })
-            .attr("cy", 50)
-            .attr("r", function(d){
+            svg.selectAll("text").data(dataset).enter().append("text").text(function(d){
                 return d
             })
-            .attr("fill", "orange")
-            .attr("stroke", "black")
-            .attr("stroke-width", function(d){
-                return d/10
-            });
+            .attr("x", function(d,i){
+                return i * (svgW / dataset.length);
+            })
+            .attr("y", function(d){
+                return svgH - d + 15
+            })
+            .attr("fill", "white")
         </script>
     </body>
 </html>     
