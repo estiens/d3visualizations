@@ -9,6 +9,7 @@
     </head>
     <body>
         <h1>D3 visualizations</h1>
+        <div class = "chart"></div>  
         <svg class="canvas">
             <!-- <rect x="0" y="0" width="400" height="50"> -->
             <!-- <circle class="circle" cx="200" cy="35" r="25"> -->
@@ -19,7 +20,7 @@
             <circle cx="100" cy="25" r="20" fill="rgba(255, 255, 0, 0.25)"/>
             <circle cx="125" cy="25" r="20" fill="rgba(255, 0, 0, 0.1)"/>
         </svg> 
-        <div class = "chart"></div>   
+         
     
 
         <script type="text/javascript">
@@ -28,11 +29,30 @@
                 var newNumber = Math.round(Math.random()*30);
                 dataset.push(newNumber);
             };
+
+            var dataset2 = [5,10,15,20,25];
+            
             d3.select("body").selectAll("div.chart").data(dataset).enter().append("div")
             .attr("class", "bar").style("height", function(d){
                var barHeight = d * 5;
                return barHeight + "px";
             })
+
+            var svg = d3.select("body").append("svg");
+            svg.attr("width", 500).attr("height", 100);
+            var circles = svg.selectAll("circle").data(dataset2).enter().append("circle");
+            circles.attr("cx", function(d, i){
+                return (i * 50) + 25;
+            })
+            .attr("cy", 50)
+            .attr("r", function(d){
+                return d
+            })
+            .attr("fill", "orange")
+            .attr("stroke", "black")
+            .attr("stroke-width", function(d){
+                return d/10
+            });
         </script>
     </body>
 </html>     
